@@ -1,9 +1,21 @@
 import { JWT_SECRET } from "../configs/variablesConfig.js";
 import jwt from "jsonwebtoken";
-export const isAuthenticated = (req, res, next) => {
-  const token = req.cookies.token;
 
-  if (token == null) {
+const findToken = () => {
+  const cookieToken = req.cookies.token;
+  if (cookieToken) {
+    return cookieToken;
+  }
+  const headerToken = req.headers.authorization;
+  if (headerToken) {
+    const splitToken = headerToken.split(" ")[1];
+    return splitToken;
+  }
+};
+export const isAuthenticated = (req, res, next) => {
+  const token = findToken();
+
+  if (!token) {
     return res.status(401).json({ message: "Token not found" });
   }
 
