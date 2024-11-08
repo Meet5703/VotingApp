@@ -37,11 +37,11 @@ const LivePoll = () => {
   const [currentUserId, setCurrentUserId] = useState(null);
   const { getSinglePoll, voteOnPoll, declareResults } = usePollsStore();
 
+  const token = localStorage.getItem("token");
+  const decodedToken = jwtDecode(token);
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (token) {
       try {
-        const decodedToken = jwtDecode(token);
         setCurrentUserId(decodedToken.id);
       } catch (error) {
         console.error("Error decoding token:", error);
@@ -136,7 +136,7 @@ const LivePoll = () => {
       <div className="text-center mb-6">
         <h2 className="text-3xl font-bold">{pollData.title}</h2>
         <p className="text-gray-300 mt-2">
-          Created by: {pollData.createdBy?.username || "Unknown"}
+          Created by: {decodedToken.username || "Unknown"}
         </p>
         <p className="text-gray-300">
           Poll created on: {new Date(pollData.createdAt).toLocaleDateString()}
