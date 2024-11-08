@@ -16,6 +16,7 @@ export const useAuthHook = () => {
       const response = await signUp();
       if (response.status === 201) {
         toast.push("Sign up successful");
+        router("/login");
         return response;
       } else {
         toast.push("Signup failed. Please try again.");
