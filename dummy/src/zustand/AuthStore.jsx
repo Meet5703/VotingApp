@@ -18,8 +18,8 @@ export const useAuthStore = create((set, get) => ({
         password: user.password,
       });
       set({ user: response.data });
-      localStorage.setItem("token", response.data.token);
-      window.location.replace("/");
+      // localStorage.setItem("token", response.data.token);
+      window.location.replace("/login");
       return response;
     } catch (error) {
       console.log(error);
