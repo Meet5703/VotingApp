@@ -4,13 +4,17 @@ import jwt from "jsonwebtoken";
 const findToken = (req) => {
   const cookieToken = req.cookies.token;
   if (cookieToken) {
+    console.log("Token found in cookies:", cookieToken);
     return cookieToken;
   }
   const headerToken = req.headers.authorization;
   if (headerToken) {
     const splitToken = headerToken.split(" ")[1];
+    console.log("Token found in headers:", splitToken);
     return splitToken;
   }
+  console.log("No token found");
+  return null;
 };
 export const isAuthenticated = (req, res, next) => {
   const token = findToken(req);
