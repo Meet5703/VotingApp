@@ -22,7 +22,7 @@ export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { isAuthenticated } = useAuthHook().useAuth();
   const menuItems = ["Home", "Participate", "Create Poll"];
-
+  const urls = ["/", "/participate", "/polls"];
   const activeStyle = {
     color: "#FFBF00",
     fontWeight: "bold",
@@ -137,7 +137,7 @@ export default function NavBar() {
                   ? "danger"
                   : "foreground"
               }
-              href="#"
+              href={urls[index]}
               size="lg"
             >
               {item}
