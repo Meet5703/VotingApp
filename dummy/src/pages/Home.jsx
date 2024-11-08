@@ -38,7 +38,7 @@ const Home = () => {
             </button>
             <button
               className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-4 px-8 rounded-lg transition duration-300 shadow-lg transform hover:scale-105"
-              onClick={() => (window.location.href = "/create-poll")}
+              onClick={() => (window.location.href = "/poll")}
             >
               Create Poll Now
             </button>
