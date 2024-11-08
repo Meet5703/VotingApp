@@ -1,9 +1,20 @@
 import { User } from "../models/User.js";
+import { generateToken } from "../utils/JWT.js";
 
-export const createUserRepo = async ({ username, email, password }) => {
+export const createUserRepo = async ({ username, email, password }, res) => {
   try {
     const user = await User.create({ username, email, password, role: "user" });
-
+    const token = await generateToken({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+    });
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 6 * 60 * 60 * 1000,
+    });
     return user;
   } catch (error) {
     throw new Error(error.message);
