@@ -1,17 +1,18 @@
+// Your existing imports
 import express from "express";
-import http from "http"; // Import the HTTP module to create the server
-import { Server } from "socket.io"; // Import the Socket.IO server
+import http from "http";
+import { Server } from "socket.io";
 import cookieParser from "cookie-parser";
 import { connectDB } from "./configs/dbConfig.js";
 import apiRouter from "./routers/apiRouter.js";
-import { Poll } from "./models/Poll.js"; // Import your Poll model
 import { FRONTEND_URL, JWT_SECRET, PORT } from "./configs/variablesConfig.js";
 import cors from "cors";
 import { verifyToken } from "./utils/JWT.js";
 import { updateVotesRepo } from "./repository/Poll.js";
 import { jwtDecode } from "jwt-decode";
+
 const app = express();
-const server = http.createServer(app); // Create an HTTP server
+const server = http.createServer(app);
 export const io = new Server(server, { cors: { origin: "*" } });
 
 // Connect to the database
@@ -21,16 +22,19 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Update CORS configuration
 app.use(
   cors({
-    origin: "https://voting-app-mkprojects.vercel.app/",
-    credentials: true,
+    origin: "https://voting-app-mkprojects.vercel.app", // Remove trailing slash
+    credentials: true, // Allow cookies to be sent
   })
 );
 
 // API routes
 app.use("/api", apiRouter);
 
+// Socket.io configuration
 io.on("connection", (socket) => {
   console.log("New connection established:", socket.id);
 
@@ -67,6 +71,7 @@ io.on("connection", (socket) => {
     console.log("User  disconnected:", socket.id);
   });
 });
+
 server.listen(PORT, () => {
   console.log("Server started on port " + PORT);
 });
