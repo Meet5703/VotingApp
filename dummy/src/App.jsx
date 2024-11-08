@@ -4,7 +4,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { useAuthHook } from "./hooks/useAuthHook";
 import Home from "./pages/Home";
-import ParticipatePolls from "./pages/PartcipatePolls";
+import ParticipatePolls from "./pages/ParticipatePolls"; // Corrected import
 import MyPolls from "./pages/myPolls";
 import LivePoll from "./pages/LivePoll";
 

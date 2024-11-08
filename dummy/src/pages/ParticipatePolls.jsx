@@ -53,13 +53,11 @@ const ParticipatePolls = () => {
 
                 <div className="mt-4 flex justify-center">
                   <button
-                    className={` text-white px-4 py-2 rounded hover:bg-green-600 ${
+                    className={`text-white px-4 py-2 rounded hover:bg-green-600 ${
                       allQuestionsDeclared ? "bg-blue-500" : "bg-green-500"
                     }`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.location.href = `/polls/${poll._id}`;
-                    }}
+                    // If you want to handle click events, you can do so here,
+                    // but make sure it doesn't interfere with the Link behavior.
                   >
                     {allQuestionsDeclared ? "See Results" : "Participate"}
                   </button>
