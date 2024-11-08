@@ -8,7 +8,7 @@ import {
 } from "../repository/User.js";
 import bcrypt from "bcrypt";
 import { generateToken } from "../utils/JWT.js";
-export const createUserService = async (userObject, res) => {
+export const createUserService = async (userObject) => {
   try {
     const existingUser = await getUserByEmailRepo(userObject.email);
     if (existingUser) {
@@ -17,9 +17,7 @@ export const createUserService = async (userObject, res) => {
         status: 400,
       });
     }
-
-    const user = await createUserRepo(userObject, res);
-
+    const user = await createUserRepo(userObject);
     return user;
   } catch (error) {
     throw new Error({

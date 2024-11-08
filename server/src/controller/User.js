@@ -14,7 +14,8 @@ export const createUserController = async (req, res) => {
         .status(400)
         .json({ message: "Username, email and password are required" });
     }
-    const user = await createUserService({ username, email, password }, res);
+    const user = await createUserService({ username, email, password });
+
     return res.status(201).json(user);
   } catch (error) {
     return res.status(error.status).json({ message: error.message });
