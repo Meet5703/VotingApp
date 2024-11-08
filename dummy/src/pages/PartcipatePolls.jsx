@@ -28,14 +28,13 @@ const ParticipatePolls = () => {
           renderSkeleton()
         ) : polls.length > 0 ? (
           polls.map((poll, pollIdx) => {
-            // Check if all questions have declared results
             const allQuestionsDeclared = poll.questions.every(
               (question) => question.result
             );
 
             return (
               <Link
-                to={`/polls/${poll._id}`} // Link to poll-specific page
+                to={`/polls/${poll._id}`}
                 key={pollIdx}
                 className="block bg-white shadow-lg rounded-lg p-6 border border-gray-200 hover:shadow-xl transition-shadow duration-300"
               >
@@ -58,7 +57,7 @@ const ParticipatePolls = () => {
                       allQuestionsDeclared ? "bg-blue-500" : "bg-green-500"
                     }`}
                     onClick={(e) => {
-                      e.preventDefault(); // Prevents navigation when clicking this button
+                      e.preventDefault();
                       window.location.href = `/polls/${poll._id}`;
                     }}
                   >

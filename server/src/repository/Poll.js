@@ -110,7 +110,7 @@ export const updateVotesRepo = async (pollId, userId, questionId, optionId) => {
     option.votes++;
     poll.participants.push({ userId, optionId });
     await poll.save();
-    io.emit("pollUpdated", poll); // Emit updated poll to all clients
+    io.emit("pollUpdated", poll);
 
     return poll;
   } catch (error) {

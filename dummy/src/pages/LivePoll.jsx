@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import { usePollsStore } from "../zustand/PollsStore";
 import { jwtDecode } from "jwt-decode"; // Ensure proper import
 import { io } from "socket.io-client";
+import { URL } from "../utils/variables";
 
 ChartJS.register(
   CategoryScale,
@@ -23,7 +24,7 @@ ChartJS.register(
   Legend
 );
 
-const socket = io("http://localhost:3000", {
+const socket = io(URL, {
   auth: {
     token: localStorage.getItem("token"), // Pass the token here
   },

@@ -55,12 +55,12 @@ export const signInService = async (userObject, res) => {
       httpOnly: true,
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
-      maxAge: 6 * 60 * 60 * 1000, // 6 hours
+      maxAge: 6 * 60 * 60 * 1000,
     });
 
     return { ...existingUser._doc, token };
   } catch (error) {
-    throw new CustomError(error.message, error.status || 500); // Default to 500 if no status is set
+    throw new CustomError(error.message, error.status || 500);
   }
 };
 

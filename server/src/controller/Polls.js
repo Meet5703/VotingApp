@@ -12,7 +12,7 @@ import {
 
 export const createPolls = async (req, res) => {
   try {
-    const { title, questions } = req.body; // Updated to match new schema
+    const { title, questions } = req.body;
     const createdBy = req.user.id;
     const poll = await createPollService({ title, questions, createdBy });
     return res.status(201).json({

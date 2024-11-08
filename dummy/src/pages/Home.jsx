@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AcmeLogo } from "../components/svg/Menu"; // Update the path to your SVG file
+import { AcmeLogo } from "../components/svg/Menu";
 
 const Home = () => {
   const [scrolling, setScrolling] = useState(false);

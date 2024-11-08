@@ -1,11 +1,12 @@
 import { test, expect } from "@playwright/test";
+import { URL } from "../configs/variablesConfig";
 
 let token;
 let pollId;
 let optionId;
 // test("Signup test", async ({ request }) => {
 //   const response = await request.post(
-//     "http://localhost:3000/api/v1/users/signup",
+//     "${URL}/api/v1/users/signup",
 //     {
 //       data: {
 //         username: "td1",
@@ -20,15 +21,12 @@ let optionId;
 //   console.log(responseBody);
 // });
 test("Signin test", async ({ request }) => {
-  const response = await request.post(
-    "http://localhost:3000/api/v1/users/signin",
-    {
-      data: {
-        email: "ex2@example.com",
-        password: "meet2003",
-      },
-    }
-  );
+  const response = await request.post(`${URL}/api/v1/users/signin`, {
+    data: {
+      email: "ex2@example.com",
+      password: "meet2003",
+    },
+  });
   expect(response.status()).toBe(200);
   const responseBody = await response.json();
   expect(responseBody).toHaveProperty("token");
@@ -47,7 +45,7 @@ test("Create a Poll", async ({ request }) => {
     ],
   };
 
-  const response = await request.post("http://localhost:3000/api/v1/polls", {
+  const response = await request.post(`${URL}/api/v1/polls`, {
     headers: {
       Cookie: `token=${token}`,
       "Content-Type": "application/json",
@@ -66,7 +64,7 @@ test("Create a Poll", async ({ request }) => {
 });
 
 test("Get Polls Associated With User", async ({ request }) => {
-  const response = await request.get("http://localhost:3000/api/v1/polls/all", {
+  const response = await request.get(`${URL}/api/v1/polls/all`, {
     headers: {
       Cookie: `token=${token}`,
     },
@@ -78,7 +76,7 @@ test("Get Polls Associated With User", async ({ request }) => {
 
 test("Vote on Poll", async ({ request }) => {
   const response = await request.post(
-    `http://localhost:3000/api/v1/polls/vote/${pollId}?optionId=${optionId}`,
+    `${URL}/api/v1/polls/vote/${pollId}?optionId=${optionId}`,
     {
       headers: {
         Cookie: `token=${token}`,
@@ -101,30 +99,24 @@ test("Update Poll", async ({ request }) => {
     ],
   };
 
-  const response = await request.put(
-    `http://localhost:3000/api/v1/polls/${pollId}`,
-    {
-      headers: {
-        Cookie: `token=${token}`,
-        "Content-Type": "application/json",
-      },
-      data: updateObject,
-    }
-  );
+  const response = await request.put(`${URL}/api/v1/polls/${pollId}`, {
+    headers: {
+      Cookie: `token=${token}`,
+      "Content-Type": "application/json",
+    },
+    data: updateObject,
+  });
 
   expect(response.status()).toBe(200);
   const responseBody = await response.text();
   //   console.log("Response Body:", responseBody);
 });
 test("Delete Poll", async ({ request }) => {
-  const response = await request.delete(
-    `http://localhost:3000/api/v1/polls/${pollId}`,
-    {
-      headers: {
-        Cookie: `token=${token}`,
-      },
-    }
-  );
+  const response = await request.delete(`${URL}/api/v1/polls/${pollId}`, {
+    headers: {
+      Cookie: `token=${token}`,
+    },
+  });
   expect(response.status()).toBe(200);
   const responseBody = await response.text();
   //   console.log("Response Body:", responseBody);

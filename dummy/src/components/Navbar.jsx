@@ -24,7 +24,7 @@ export default function NavBar() {
   const menuItems = ["Home", "Participate", "Create Poll"];
 
   const activeStyle = {
-    color: "#FFBF00", // A bright yellow for visibility
+    color: "#FFBF00",
     fontWeight: "bold",
   };
   const token = localStorage.getItem("token")
@@ -38,7 +38,7 @@ export default function NavBar() {
   const getLinkStyle = (path) => {
     return window.location.pathname === path
       ? activeStyle
-      : { color: "#969696" }; // Default color for inactive links
+      : { color: "#969696" };
   };
 
   const handleLogout = () => {

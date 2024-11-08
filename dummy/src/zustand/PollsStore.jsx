@@ -2,13 +2,12 @@ import { create } from "zustand";
 import axiosInstence from "../utils/axiosInstence";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
+import { URL } from "../utils/variables";
 
-const socket = io.connect("http://localhost:3000");
+const socket = io.connect(URL);
 
 export const usePollsStore = create((set, get) => {
-  // Socket event handlers for real-time updates
   socket.on("pollUpdated", (updatedPoll) => {
-    // Update the specific poll in the state
     set((state) => {
       const updatedPolls = state.polls.map((poll) =>
         poll._id === updatedPoll._id ? updatedPoll : poll
@@ -18,7 +17,6 @@ export const usePollsStore = create((set, get) => {
   });
 
   socket.on("voteUpdated", (updatedData) => {
-    // Update the poll data in state if it's related to the currently viewed poll
     set((state) => ({
       pollData: {
         ...state.pollData,

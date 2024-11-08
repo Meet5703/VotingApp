@@ -36,7 +36,7 @@ io.on("connection", (socket) => {
 
   socket.on("voteUpdated", async ({ pollId, questionId, optionId }) => {
     try {
-      const token = socket.handshake.auth.token; // Assuming you send the token in the handshake
+      const token = socket.handshake.auth.token;
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.id;
       console.log({

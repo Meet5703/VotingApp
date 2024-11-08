@@ -17,7 +17,7 @@ export const AuthFormCustom = ({
     <div className="bg-gradient-to-r from-slate-300 to-slate-500 flex flex-col h-screen justify-center items-center dark:from-purple-800 dark:to-blue-800">
       <div
         style={{
-          backdropFilter: "blur(3px)", // Strong blur effect
+          backdropFilter: "blur(3px)",
         }}
         className="w-full max-w-md bg-transparent border border-gray-700 dark:bg-gray-900/80 shadow-lg rounded-lg p-6"
       >

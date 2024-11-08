@@ -119,7 +119,7 @@ const MyPolls = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {polls.map((poll, pollIdx) => (
             <Link
-              to={`/polls/${poll._id}`} // Link to poll-specific page
+              to={`/polls/${poll._id}`}
               key={pollIdx}
               className="block bg-white shadow-lg rounded-lg p-6 border border-gray-200 hover:shadow-xl transition-shadow duration-300"
             >
@@ -137,21 +137,12 @@ const MyPolls = () => {
                 <button
                   className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                   onClick={(e) => {
-                    e.preventDefault(); // Prevents navigation when clicking this button
+                    e.preventDefault();
                     console.log(poll);
                   }}
                 >
                   Stop Poll
                 </button>
-                {/* <button
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                  onClick={(e) => {
-                    e.preventDefault(); // Prevents navigation when clicking this button
-                    viewResults(poll.id);
-                  }}
-                >
-                  View Results
-                </button> */}
               </div>
             </Link>
           ))}

@@ -29,13 +29,13 @@ export const useAuthStore = create((set, get) => ({
 
   signIn: async () => {
     try {
-      const user = get().user; // Use get() to access current state
+      const user = get().user;
       const response = await axiosInstence.post("/users/signin", {
         email: user.email,
         password: user.password,
       });
 
-      set({ user: response.data }); // Update user state directly
+      set({ user: response.data });
       localStorage.setItem("token", response.data.token);
       window.location.replace("/");
       return response;

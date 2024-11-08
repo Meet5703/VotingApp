@@ -28,7 +28,6 @@ export const signInController = async (req, res) => {
     return res.status(200).json(user);
   } catch (error) {
     console.log(error);
-    // Use error.status or default to 500
     const statusCode = error.status || 500;
     return res.status(statusCode).json({ message: error.message });
   }
