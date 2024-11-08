@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import { connectDB } from "./configs/dbConfig.js";
 import apiRouter from "./routers/apiRouter.js";
 import { Poll } from "./models/Poll.js"; // Import your Poll model
-import { JWT_SECRET, PORT } from "./configs/variablesConfig.js";
+import { FRONTEND_URL, JWT_SECRET, PORT } from "./configs/variablesConfig.js";
 import cors from "cors";
 import { verifyToken } from "./utils/JWT.js";
 import { updateVotesRepo } from "./repository/Poll.js";
@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: FRONTEND_URL,
     credentials: true,
   })
 );
