@@ -70,8 +70,10 @@ export const usePollsStore = create((set, get) => {
           error.response.status === 400 ||
           error.response.status === 401
         ) {
-          document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-          window.location.replace("/login");
+          console.log(error.response.data.message);
+
+          // document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+          // window.location.replace("/login");
           toast.error(error.response.data.message);
         }
         console.error("Error fetching poll:", error);
