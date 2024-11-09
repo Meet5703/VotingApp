@@ -3,6 +3,7 @@ import axiosInstence from "../utils/axiosInstence";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 import { URL } from "../utils/variables";
+import { jwtDecode } from "jwt-decode";
 
 const socket = io.connect(URL);
 
@@ -45,13 +46,25 @@ export const usePollsStore = create((set, get) => {
         console.error("Error fetching polls:", error);
       }
     },
+    fetchPollsAssociatedWithUser: async () => {
+      try {
+        const token = jwtDecode(localStorage.getItem("token"));
+        const userId = token.id;
+        const response = await axiosInstence.get(`/polls/all/${userId}`);
+        set({ polls: response.data.data });
+        // toast.success("Polls fetched successfully!");
+        return response.data.data;
+      } catch (error) {
+        console.error("Error fetching polls:", error);
+      }
+    },
 
     createPolls: async () => {
       try {
         const pollData = get().pollData;
         const response = await axiosInstence.post("/polls", pollData);
         console.log("Poll created:", response.data);
-        await get().fetchPolls();
+        await get().fetchPollsAssociatedWithUser();
         toast.success("Poll created successfully!");
       } catch (error) {
         toast.error("Poll creation failed. Please try again.");
@@ -63,6 +76,7 @@ export const usePollsStore = create((set, get) => {
       try {
         const response = await axiosInstence.get(`/polls/${pollId}`);
         set({ pollData: response.data.data });
+        toast.success("Poll fetched successfully!");
         return response.data.data;
       } catch (error) {
         if (
@@ -153,9 +167,21 @@ export const usePollsStore = create((set, get) => {
           `/polls/result/${pollId}?questionId=${questionId}`
         );
         console.log("Declared results:", response.data);
+        toast.success("Results declared successfully!");
         return response.data;
       } catch (error) {
+        toast.error("Results declaration failed. Please try again.");
         console.error("Error declaring results:", error);
+      }
+    },
+    deletePoll: async (pollId) => {
+      try {
+        const response = await axiosInstence.delete(`/polls/${pollId}`);
+        toast.success("Poll deleted successfully!");
+        return response.data;
+      } catch (error) {
+        toast.error("Poll deletion failed. Please try again.");
+        console.error("Error deleting poll:", error);
       }
     },
   };

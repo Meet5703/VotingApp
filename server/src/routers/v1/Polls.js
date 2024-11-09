@@ -17,7 +17,7 @@ router.post("/", isAuthenticated, createPolls);
 
 router.get("/", getAllPollsController);
 
-router.get("/all", isAuthenticated, getPollsAssociatedWithUser);
+router.get("/all/:userId", isAuthenticated, getPollsAssociatedWithUser);
 
 router.get("/:pollId", isAuthenticated, getPollByIdController);
 

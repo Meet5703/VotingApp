@@ -6,6 +6,7 @@ const MyPolls = () => {
   const {
     polls,
     fetchPolls,
+    fetchPollsAssociatedWithUser,
     createPolls,
     pollData,
     setPollTitle,
@@ -14,12 +15,12 @@ const MyPolls = () => {
     addQuestion,
     addOption,
     resetPollData,
+    deletePoll,
   } = usePollsStore();
 
   useEffect(() => {
-    fetchPolls();
-    console.log(polls);
-  }, [fetchPolls]);
+    fetchPollsAssociatedWithUser();
+  }, [fetchPollsAssociatedWithUser]);
 
   const handleInputChange = (e, questionIdx, optionIdx) => {
     const { name, value } = e.target;
@@ -32,6 +33,10 @@ const MyPolls = () => {
     }
   };
 
+  const handleDeletePoll = async (pollId) => {
+    await deletePoll(pollId);
+    fetchPollsAssociatedWithUser();
+  };
   const handleCreatePoll = async () => {
     await createPolls();
 
@@ -138,10 +143,18 @@ const MyPolls = () => {
                   className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                   onClick={(e) => {
                     e.preventDefault();
-                    console.log(poll);
                   }}
                 >
                   Stop Poll
+                </button>
+                <button
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleDeletePoll(poll._id);
+                  }}
+                >
+                  Delete Poll
                 </button>
               </div>
             </Link>

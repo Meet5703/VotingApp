@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AcmeLogo } from "../components/svg/Menu";
-
+import Img1 from "../assets/poll.png";
+import Img2 from "../assets/create.png";
 const Home = () => {
   const [scrolling, setScrolling] = useState(false);
 
@@ -44,10 +45,67 @@ const Home = () => {
             </button>
           </div>
         </div>
+
+        {/* New "How It Works" Section */}
+        <section className="w-full py-16 bg-gradient-to-b from-gray-800 to-gray-700 text-gray-200">
+          <div className="max-w-5xl mx-auto px-6">
+            <h2 className="text-4xl font-bold mb-8 text-center text-yellow-400">
+              How It Works
+            </h2>
+            <div className="space-y-8">
+              <div className="flex flex-col md:flex-row md:space-x-6 items-start md:items-center">
+                <div className="md:w-1/2 mb-6 md:mb-0">
+                  <h3 className="text-2xl font-semibold mb-2 text-white">
+                    Participate in a Poll
+                  </h3>
+                  <p className="leading-relaxed">
+                    To participate, simply go to the{" "}
+                    <strong>Participate</strong> tab, find a relevant poll that
+                    interests you, and submit your response. However, if a
+                    poll’s result has been declared, participation is no longer
+                    allowed.
+                  </p>
+                </div>
+                <div className="md:w-1/2">
+                  <img
+                    src={Img1}
+                    alt="Participate illustration"
+                    className="w-full rounded-lg shadow-lg"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col md:flex-row-reverse md:space-x-6 items-start md:items-center">
+                <div className="md:w-1/2 mb-6 md:mb-0">
+                  <h3 className="text-2xl font-semibold mb-2 text-white">
+                    Create Your Own Poll
+                  </h3>
+                  <p className="leading-relaxed">
+                    Head over to the <strong>Make Polls</strong> tab to create a
+                    poll. Add your question and options to collect public
+                    opinions. You can even create multiple questions at once.
+                    After creating, access your polls through the bottom of the
+                    form or the
+                    <strong> Participate</strong> page, where a chart for each
+                    question will show real-time voting data.
+                  </p>
+                </div>
+                <div className="md:w-1/2">
+                  <img
+                    src={Img2}
+                    alt="Create Poll illustration"
+                    className="w-full rounded-lg shadow-lg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );
 };
+
 const AnimatedBackground = () => (
   <svg
     className="absolute inset-0 w-full h-full opacity-50 animate-slow-float"
@@ -55,8 +113,7 @@ const AnimatedBackground = () => (
   >
     <defs>
       <radialGradient id="circleGradient" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" style={{ stopColor: "#00BFFF", stopOpacity: 0.9 }} />{" "}
-        {/* Brighter blue */}
+        <stop offset="0%" style={{ stopColor: "#00BFFF", stopOpacity: 0.9 }} />
         <stop
           offset="100%"
           style={{ stopColor: "transparent", stopOpacity: 0 }}
@@ -64,12 +121,10 @@ const AnimatedBackground = () => (
       </radialGradient>
     </defs>
 
-    {/* Larger circles for visibility */}
     <circle cx="20%" cy="30%" r="300" fill="url(#circleGradient)" />
     <circle cx="80%" cy="50%" r="350" fill="url(#circleGradient)" />
     <circle cx="50%" cy="70%" r="250" fill="url(#circleGradient)" />
 
-    {/* Animated Particles */}
     <rect x="40%" y="20%" width="15" height="15" fill="#FF6B6B" opacity="0.8">
       <animate
         attributeName="y"

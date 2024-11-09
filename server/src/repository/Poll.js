@@ -13,11 +13,12 @@ export const createPollRepo = async ({ title, questions, createdBy }) => {
 
 export const getAllPollsRepoAssociatedWithUser = async (userId) => {
   try {
-    const polls = await Poll.find({ createdBy: userId });
+    const polls = await Poll.find({ createdBy: userId })
+      .populate("createdBy")
+      .populate("participants.userId");
     return polls;
   } catch (error) {
     console.log(error);
-
     throw new Error(error.message);
   }
 };

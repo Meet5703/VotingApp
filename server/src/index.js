@@ -15,7 +15,10 @@ const app = express();
 const server = http.createServer(app);
 export const io = new Server(server, {
   cors: {
-    origin: "https://voting-app-mkprojects.vercel.app", // No trailing slash
+    origin: [
+      "https://voting-app-mkprojects.vercel.app",
+      "http://localhost:5173",
+    ], // No trailing slash
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -32,7 +35,10 @@ app.use(cookieParser());
 // Update CORS configuration
 app.use(
   cors({
-    origin: "https://voting-app-mkprojects.vercel.app", // Remove trailing slash
+    origin: [
+      "https://voting-app-mkprojects.vercel.app",
+      "http://localhost:5173",
+    ], // Remove trailing slash
     credentials: true, // Allow cookies to be sent
   })
 );

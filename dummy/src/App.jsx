@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import ParticipatePolls from "./pages/ParticipatePolls"; // Corrected import
 import MyPolls from "./pages/myPolls";
 import LivePoll from "./pages/LivePoll";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { isAuthenticated } = useAuthHook().useAuth();

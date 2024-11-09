@@ -26,13 +26,13 @@ ChartJS.register(
 
 const socket = io(URL, {
   auth: {
-    token: localStorage.getItem("token"), // Pass the token here
+    token: localStorage.getItem("token"),
   },
 });
 
 const LivePoll = () => {
   const { pollId } = useParams();
-  const [showCharts, setShowCharts] = useState([]); // Visibility controlled by the owner
+  const [showCharts, setShowCharts] = useState([]);
   const [pollData, setPollData] = useState({ questions: [] });
   const [currentUserId, setCurrentUserId] = useState(null);
   const { getSinglePoll, voteOnPoll, declareResults } = usePollsStore();
@@ -171,7 +171,7 @@ const LivePoll = () => {
                 {question.question}
               </h3>
 
-              {isPollOwner && (
+              {/* {isPollOwner && (
                 <div className="flex justify-end mb-4">
                   <button
                     onClick={() => handleToggleChartVisibility(questionIndex)}
@@ -180,7 +180,7 @@ const LivePoll = () => {
                     {showCharts[questionIndex] ? "Hide Chart" : "Show Chart"}
                   </button>
                 </div>
-              )}
+              )} */}
 
               {(isPollOwner || showCharts[questionIndex]) && (
                 <div className="mb-4">

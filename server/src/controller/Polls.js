@@ -43,7 +43,7 @@ export const voteController = async (req, res) => {
 
 export const getPollsAssociatedWithUser = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.params.userId;
     const polls = await getAllPollsRepoAssociatedWithUser(userId);
     return res.status(200).json({
       message: "Polls fetched successfully",
