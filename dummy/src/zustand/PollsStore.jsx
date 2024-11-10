@@ -114,9 +114,10 @@ export const usePollsStore = create((set, get) => {
 
         return response.data;
       } catch (error) {
-        if (error.response.message === "Request failed with status code 500") {
-          toast.error("You have already voted on this poll.");
+        if (error.response.data.message === "An error occurred while voting") {
+          toast.error("You have already voted on this poll");
         }
+
         console.error("Error voting on poll:", error);
       }
     },
