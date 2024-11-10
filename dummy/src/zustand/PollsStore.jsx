@@ -1,9 +1,9 @@
-import { create } from "zustand";
-import axiosInstence from "../utils/axiosInstence";
+import { jwtDecode } from "jwt-decode";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
+import { create } from "zustand";
+import axiosInstence from "../utils/axiosInstence";
 import { URL } from "../utils/variables";
-import { jwtDecode } from "jwt-decode";
 
 const socket = io.connect(URL);
 
@@ -114,6 +114,9 @@ export const usePollsStore = create((set, get) => {
 
         return response.data;
       } catch (error) {
+        if (error.response.message === "Request failed with status code 500") {
+          toast.error("You have already voted on this poll.");
+        }
         console.error("Error voting on poll:", error);
       }
     },
